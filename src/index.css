@@ -5,9 +5,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+     background: linear-gradient(89deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);
+
+/*   background: #bbd2c5;  *//* fallback for old browsers */
+  /* background: -webkit-linear-gradient(190deg, #bbd2c5 0%, #536976 51%, #292e49 100%); */ /* Chrome 10-25, Safari 5.1-6 */
+/*   background: linear-gradient(270deg, #bbd2c5 0%, #536976 51%, #292e49 100%);
+ */}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+button{cursor: pointer;}
