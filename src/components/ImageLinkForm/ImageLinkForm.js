@@ -7,7 +7,7 @@
      return (
          <div className='ma4 mt0'>
          <p className='f3'>
-         {'This Magic Brain will detect faces in your picture try it out'}</p> 
+         {'This app will detect a face in your, picture try it out'}</p> 
 		<div className='center'>
 		<div className='form center shadow-5 pa4 br3'>
 			<input className='f4 pa2 w-70 center' type='text' onChange={onInputChange}/>
