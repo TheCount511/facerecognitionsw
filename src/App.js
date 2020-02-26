@@ -24,6 +24,8 @@ const initialState = {
     box: '',
     route: 'signIn',
     isSignedIn: false,
+    loader: 'none',
+    errorMessage: '',
     user: {
         id: '',
         name: '',
@@ -69,7 +71,7 @@ class App extends Component {
     displayBox = (box) => { this.setState({ box: box }) }
 
     onPictureSubmit = () => {
-        this.setState({ imageUrl: this.state.input })
+        this.setState({ imageUrl: this.state.input, loader: 'block', errorMessage: '' })
         fetch(' https://infinite-island-72586.herokuapp.com/imageurl', {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
@@ -79,6 +81,7 @@ class App extends Component {
             }).then(response => response.json())
             .then(response => {
                 if (response.outputs) {
+                    this.setState({loader:'none'})
                     fetch(' https://infinite-island-72586.herokuapp.com/image', {
                             method: 'put',
                             headers: { 'Content-Type': 'application/json' },
@@ -88,10 +91,16 @@ class App extends Component {
                         })
                         .then(response => response.json())
                         .then(count => {
-                            this.setState(Object.assign(this.state.user, { entries: count }))
+                            this.setState(Object.assign(this.state.user, { entries: count }, ))
                         }).catch(console.log)
+                } else {
+                    this.setState({
+                        loader: 'none',
+                        errorMessage: response
+                    })
                 }
                 this.displayBox(this.calculateFaceLocation(response))
+
             }).catch(err => console.log(err));
     }
 
@@ -105,7 +114,7 @@ class App extends Component {
     }
 
     render() {
-        const { isSignedIn, route, box, imageUrl } = this.state;
+        const { isSignedIn, route, box, imageUrl, loader, errorMessage } = this.state;
 
         return (
             <div className="App">
@@ -117,7 +126,7 @@ class App extends Component {
                 <Logo />
                 <Rank name={this.state.user.name} entries={this.state.user.entries} />
                 <ImageLinkForm onInputChange={this.onInputChange} onPictureSubmit={this.onPictureSubmit}/>
-                <FaceRecognition box={box} imageUrl={imageUrl} />
+                <FaceRecognition box={box} imageUrl={imageUrl} loader={loader} errorMessage={errorMessage}/>
            </div>:
            (route==='signIn'|| route==='signOut'?
                 <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} /> 

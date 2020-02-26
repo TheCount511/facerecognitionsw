@@ -6,8 +6,8 @@
 
      return (
          <div className='ma4 mt0'>
-         <p className='f3'>
-         {'This app will detect a face in your, picture try it out'}</p> 
+         <p className='f3 light-yellow'>
+         {'Enter a link to a picture, and this app will detect the first face in it. Try it out'}</p> 
 		<div className='center'>
 		<div className='form center shadow-5 pa4 br3'>
 			<input className='f4 pa2 w-70 center' type='text' onChange={onInputChange}/>
